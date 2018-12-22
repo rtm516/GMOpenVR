@@ -1,3 +1,5 @@
+CreateConVar("vr_draw_monitor", "0", FCVAR_ARCHIVE)
+
 local w,h = ScrW(),ScrH()
 
 local eyeDist = 2
@@ -39,7 +41,7 @@ local function DrawVR(eyepos, eyeang)
 		angles = eyeang,
 		x = 0,
 		y = 0,
-		w = w / part,
+		w = w,
 		h = h
 	})
 
@@ -50,16 +52,20 @@ local function DrawVR(eyepos, eyeang)
 	render.RenderView({
 		origin = eyepos - dist,
 		angles = eyeang,
-		x = w / part,
+		x = 0,
 		y = 0,
-		w = w / part,
+		w = w,
 		h = h
 	})
 
-	//OpenVR.Render()
+	OpenVR.Render(lEye, rEye)
 
 	render.SetRenderTarget(oldRT)
 
-	return //true
+	if (GetConVar("vr_draw_monitor"):GetBool()) then
+		return
+	else
+		return true
+	end
 end
 hook.Add("RenderScene", "RenderVR", DrawVR)
