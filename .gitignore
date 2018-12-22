@@ -1,0 +1,4 @@
+build/*
+projects/*
+buildconfig.lua
+premake5.exe
