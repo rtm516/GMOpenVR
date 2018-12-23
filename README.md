@@ -33,21 +33,22 @@ Download the latest `openvr_api.dll` and place it directly in your Garry's Mod r
 * Windows (Tested with Windows 10)
 * [Visual Studio](https://www.visualstudio.com) With Windows SDK v8.1 or higher (Tested with version 2017)
 * [Valve OpenVR SDK](https://github.com/ValveSoftware/openvr) (read instructions before cloning)
+* [Source SDK 2013](https://github.com/ValveSoftware/source-sdk-2013) (read instructions before cloning)
 * [Premake 5.0+](https://github.com/premake/premake-core/releases) extracted to your _C:\Windows_ folder, path, or the project directory (it will be gitignored)
 
 ## Installation for development
 1. Clone Repo with a [git CLI](https://git-scm.com/downloads)
 	```bash
-	$ git clone https://github.com/bizzclaw/gmVR.git
+	$ git clone https://github.com/rtm516/GMOpenVR.git
 	```
 
-2. Clone the Valve OpenVR sdk to a folder and take note of that folder's location.
+2. Clone the Valve OpenVR SDK and Source SDK 2013 to a folder and take note of that folder's location.
 3. Create a new file called `"buildconfig.lua"` in the project's main directory with your favorite text editor, fill it with the following:
 
 	*NOTE:* You cannot use backslashes for the path! You'll have to replace any "\\"s with "/"s		
 
 	```LUA
-	sdkPaths = "Set this as the path to the folder that contains your cloned OpenVR SDK EG: 'G:/GitHub' where the openvr folder is inside there"
+	sdkPaths = "Set this as the path to the folder that contains your cloned OpenVR SDK EG: 'G:/GitHub' where the openvr and source-sdk-2013 folder is inside there"
 	```
 
 4. Now, simply run `BuildProjects.bat`, the batch file will generate a project folder with a Visual Studio project that can be loaded.

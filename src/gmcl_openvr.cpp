@@ -2,6 +2,8 @@
 #include <math.h>
 #include <float.h>
 #include "GarrysMod/Lua/Interface.h"
+#include "ismalltexture.h"
+#include "smallvtf.h"
 #include "openvr.h"
 
 int version = 1; //every release this will be incremented, in lua, the user will be warned to update the dll if they have a lua version ahead of the module.
@@ -104,6 +106,35 @@ LUA_FUNCTION(Render)
 {
 	LUA->CheckType(1, Type::TEXTURE);
 	LUA->CheckType(2, Type::TEXTURE);
+	//IVRCompositor::Submit(EVREye::Eye_Left, )
+
+	luaPrint(LUA, "Render 1");
+
+	ITexture *lEye = LUA->GetUserType<ITexture>(1, Type::TEXTURE);
+	size_t lNumBytes;
+
+	lEye->SaveToFile("vr_left_eye.tga");
+
+	ITexture *rEye = LUA->GetUserType<ITexture>(2, Type::TEXTURE);
+	size_t rNumBytes;
+
+	rEye->SaveToFile("vr_right_eye.tga");
+
+	luaPrint(LUA, "Render 3.5");
+	//void const *screenData = lEye->GetResourceData(VTF_LEGACY_RSRC_IMAGE, &lNumBytes);
+
+	Texture_t texture = { lEye->GetResourceData(VTF_LEGACY_RSRC_IMAGE, &lNumBytes), vr::TextureType_DirectX, vr::ColorSpace_Auto };
+	VRCompositor()->Submit(EVREye::Eye_Left, &texture);
+	VRCompositor()->Submit(EVREye::Eye_Right, &texture);
+
+
+	//ImageLoader::ConvertImageFormat((const unsigned char*)lEye->GetResourceData(VTF_LEGACY_RSRC_IMAGE, &lNumBytes), lEye->GetImageFormat(), dst, ImageLoader::ImageFormatToD3DFormat(lEye->GetImageFormat()), lEye->GetActualWidth(), lEye->GetActualHeight());
+
+
+	luaPrint(LUA, "Render 4");
+
+	luaPrint(LUA, "");
+	luaPrint(LUA, "Render 5");
 
 	LUA->PushBool(false);
 	return 1;

@@ -15,6 +15,7 @@ project "gmcl_openvr"
 	includedirs  {
 		"include/",
 		sdkPaths.."/openvr/headers",
+		sdkPaths.."/source-sdk-2013/mp/src/public",
 	}
     targetdir    "build"
     symbols      "On"
